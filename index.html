@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BASERA • Digital Menu</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#f6f1e8;
+    color:#2d241d;
+    font-family:'Poppins',sans-serif;
+}
+
+/* HEADER */
+
+header{
+    background:#201912;
+    color:#f7ead5;
+    text-align:center;
+    padding:45px 20px 35px;
+}
+
+.logo{
+    font-family:'Playfair Display',serif;
+    font-size:42px;
+    letter-spacing:5px;
+}
+
+.tagline{
+    margin-top:8px;
+    font-size:12px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    opacity:.8;
+}
+
+/* SEARCH */
+
+.search-box{
+    max-width:600px;
+    margin:25px auto;
+    padding:0 20px;
+}
+
+.search-box input{
+    width:100%;
+    padding:15px 20px;
+    border:1px solid #c9bba7;
+    border-radius:30px;
+    background:#fffdf9;
+    outline:none;
+    font-size:14px;
+}
+
+/* CATEGORY */
+
+.categories{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding:10px 20px 20px;
+    max-width:1100px;
+    margin:auto;
+}
+
+.categories::-webkit-scrollbar{
+    height:4px;
+}
+
+.categories button{
+    white-space:nowrap;
+    padding:10px 20px;
+    border-radius:25px;
+    border:1px solid #b49b7c;
+    background:transparent;
+    color:#4b3828;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.categories button:hover,
+.categories button.active{
+    background:#302217;
+    color:white;
+}
+
+/* MENU */
+
+.menu{
+    max-width:1100px;
+    margin:10px auto 100px;
+    padding:0 20px;
+}
+
+.section-title{
+    font-family:'Playfair Display',serif;
+    font-size:30px;
+    margin:35px 0 18px;
+    border-bottom:1px solid #cdbfae;
+    padding-bottom:10px;
+}
+
+.items{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:18px;
+}
+
+.item{
+    background:#fffdf9;
+    border:1px solid #e3d8c8;
+    padding:22px;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.item:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.item-top{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.item-name{
+    font-family:'Playfair Display',serif;
+    font-size:20px;
+}
+
+.price{
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.description{
+    font-size:12px;
+    color:#766b60;
+    margin:8px 0 15px;
+    line-height:1.6;
+}
+
+.add-btn{
+    width:100%;
+    padding:10px;
+    border:1px solid #39291d;
+    background:transparent;
+    color:#39291d;
+    border-radius:5px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.add-btn:hover{
+    background:#39291d;
+    color:white;
+}
+
+/* ORDER BAR */
+
+.order-bar{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:#201912;
+    color:white;
+    padding:15px 20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:30px;
+    box-shadow:0 -5px 20px rgba(0,0,0,.15);
+    z-index:50;
+}
+
+.order-btn{
+    background:#e5c79d;
+    border:none;
+    padding:11px 25px;
+    border-radius:25px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+/* MODAL */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    justify-content:center;
+    align-items:center;
+    z-index:100;
+}
+
+.modal-content{
+    background:#fffdf9;
+    width:90%;
+    max-width:450px;
+    padding:30px;
+    border-radius:10px;
+    max-height:80vh;
+    overflow:auto;
+}
+
+.modal-title{
+    font-family:'Playfair Display',serif;
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.order-item{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    border-bottom:1px solid #ddd;
+    padding:12px 0;
+    font-size:14px;
+}
+
+.close{
+    float:right;
+    cursor:pointer;
+    font-size:22px;
+}
+
+.total{
+    font-size:20px;
+    font-weight:bold;
+    margin-top:20px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.place-order{
+    width:100%;
+    padding:14px;
+    margin-top:20px;
+    background:#241b14;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:35px 20px 90px;
+    color:#776b5e;
+    font-size:12px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .logo{
+        font-size:32px;
+    }
+
+    .section-title{
+        font-size:26px;
+    }
+
+    .items{
+        grid-template-columns:1fr;
+    }
+
+    .order-bar{
+        justify-content:space-between;
+        gap:10px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">BASERA</div>
+
+    <div class="tagline">
+        Eat • Talk • Enjoy
+    </div>
+
+</header>
+
+
+<div class="search-box">
+
+    <input
+        type="text"
+        id="search"
+        placeholder="Search your favourite dish..."
+        onkeyup="searchMenu()"
+    >
+
+</div>
+
+
+<div class="categories">
+
+    <button class="active" onclick="filterMenu('all',this)">
+        All
+    </button>
+
+    <button onclick="filterMenu('coffee',this)">
+        Coffee
+    </button>
+
+    <button onclick="filterMenu('shakes',this)">
+        Shakes
+    </button>
+
+    <button onclick="filterMenu('mocktails',this)">
+        Mocktails
+    </button>
+
+    <button onclick="filterMenu('sandwiches',this)">
+        Sandwiches
+    </button>
+
+    <button onclick="filterMenu('wraps',this)">
+        Toast & Wraps
+    </button>
+
+    <button onclick="filterMenu('burgers',this)">
+        Burgers
+    </button>
+
+    <button onclick="filterMenu('pasta',this)">
+        Pasta
+    </button>
+
+    <button onclick="filterMenu('pizza',this)">
+        Pizza
+    </button>
+
+    <button onclick="filterMenu('breakfast',this)">
+        Breakfast
+    </button>
+
+    <button onclick="filterMenu('reso',this)">
+        Reso Baul
+    </button>
+
+    <button onclick="filterMenu('combo',this)">
+        Combos
+    </button>
+
+    <button onclick="filterMenu('fries',this)">
+        Fries
+    </button>
+
+    <button onclick="filterMenu('chinese',this)">
+        Chinese
+    </button>
+
+    <button onclick="filterMenu('other',this)">
+        Other
+    </button>
+
+</div>
+
+
+<main class="menu" id="menu"></main>
+
+
+<footer>
+
+    <p>BASERA</p>
+
+    <p>
+        Good food. Good conversations. Good memories.
+    </p>
+
+</footer>
+
+
+<!-- ORDER BAR -->
+
+<div class="order-bar">
+
+    <div>
+        Items: <span id="count">0</span>
+    </div>
+
+    <div>
+        ₹<span id="total">0</span>
+    </div>
+
+    <button class="order-btn" onclick="openOrder()">
+        View Order
+    </button>
+
+</div>
+
+
+<!-- ORDER MODAL -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeOrder()">
+            ×
+        </span>
+
+        <div class="modal-title">
+            Your Order
+        </div>
+
+        <div id="orderList"></div>
+
+        <div class="total">
+
+            <span>Total</span>
+
+            <span>
+                ₹<span id="modalTotal">0</span>
+            </span>
+
+        </div>
+
+        <button class="place-order"
+        onclick="placeOrder()">
+
+            Place Order
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   BASERA MENU
+========================= */
+
+const menuData = [
+
+/* HOT COFFEE */
+
+{
+    category:"coffee",
+    section:"Hot Coffee",
+    name:"Cappuccino",
+    price:109,
+    description:"The timeless classic consisting of equal parts rich espresso, warm steamed milk, and thick, velvety foam."
+},
+
+{
+    category:"coffee",
+    section:"Hot Coffee",
+    name:"Cafe Mocha",
+    price:109,
+    description:"A comforting sweet fusion of robust espresso, rich cocoa sauce, and velvety steamed milk."
+},
+
+{
+    category:"coffee",
+    section:"Hot Coffee",
+    name:"Americano",
+    price:79,
+    description:"Freshly extracted premium espresso shots diluted with clean hot water for a smooth, bold black coffee."
+},
+
+{
+    category:"coffee",
+    section:"Hot Coffee",
+    name:"Hazelnut Cappuccino",
+    price:129,
+    description:"Our classic cappuccino infused with a sweet, aromatic twist of premium roasted hazelnut syrup."
+},
+
+{
+    category:"coffee",
+    section:"Hot Coffee",
+    name:"Caramel Cappuccino",
+    price:129,
+    description:"Rich espresso and steamed milk flavored with buttery caramel syrup, finished with a luscious foam."
+},
+
+{
+    category:"coffee",
+    section:"Hot Coffee",
+    name:"Coffee Cafe Latte",
+    price:109,
+    description:"A mild and wonderfully smooth coffee experience combining fresh espresso and plenty of steamed milk."
+},
+
+{
+    category:"coffee",
+    section:"Hot Coffee",
+    name:"Vanilla Coffee",
+    price:129,
+    description:"Freshly brewed coffee infused with the delicate, sweet, and comforting fragrance of exotic vanilla extract."
+},
+
+{
+    category:"coffee",
+    section:"Hot Coffee",
+    name:"Hot Chocolate Coffee",
+    price:99,
+    description:"An ultra-rich blend of artisan dark hot chocolate fused seamlessly with a warm kick of fresh espresso."
+},
+
+/* COLD BREWS */
+
+{
+    category:"coffee",
+    section:"Cold Brews",
+    name:"Cafe Frape",
+    price:139,
+    description:"Rich coffee blended with milk, sugar, and ice cream until thick, smooth, and perfectly frosty."
+},
+
+{
+    category:"coffee",
+    section:"Cold Brews",
+    name:"Ice Mocha",
+    price:129,
+    description:"A perfect blend of rich espresso and chocolate sauce with cold milk, served over ice."
+},
+
+{
+    category:"coffee",
+    section:"Cold Brews",
+    name:"Affogato",
+    price:99,
+    description:"A delightful dessert-coffee crossover featuring hot, intense espresso poured over cold vanilla ice cream."
+},
+
+{
+    category:"coffee",
+    section:"Cold Brews",
+    name:"Ice Latte",
+    price:129,
+    description:"Smooth, bold espresso combined with refreshing chilled milk and served crisp over ice."
+},
+
+{
+    category:"coffee",
+    section:"Cold Brews",
+    name:"Mocha Frappe",
+    price:139,
+    description:"An ultra-indulgent ice-blended coffee treat mixed with deep, premium chocolate syrup and whipped topping."
+},
+
+/* SHAKES */
+
+{
+    category:"shakes",
+    section:"Shakes",
+    name:"Strawberry Shake",
+    price:149,
+    description:"A creamy, vibrant shake packed with the refreshing and sweet taste of summer strawberries."
+},
+
+{
+    category:"shakes",
+    section:"Shakes",
+    name:"Mango Shake",
+    price:149,
+    description:"Tropical indulgence featuring the luscious and sweet flavor of sun-ripened king mangos."
+},
+
+{
+    category:"shakes",
+    section:"Shakes",
+    name:"Pineapple Shake",
+    price:149,
+    description:"A tangy, sweet, and tropical shake that offers a beautifully unique refreshment."
+},
+
+{
+    category:"shakes",
+    section:"Shakes",
+    name:"Chocolate Oreo Shake",
+    price:159,
+    description:"An absolute favorite thick shake blended thoroughly with crunchy Oreo cookies and rich chocolate syrup."
+},
+
+{
+    category:"shakes",
+    section:"Shakes",
+    name:"Vanilla Shake",
+    price:149,
+    description:"Classic, velvety, and elegant shake loaded with the fragrant essence of pure vanilla pods."
+},
+
+{
+    category:"shakes",
+    section:"Shakes",
+    name:"Butter Scotch Shake",
+    price:149,
+    description:"Rich and buttery shake mixed with crunchy, sweet butterscotch nut pralines for an amazing texture."
+},
+
+{
+    category:"shakes",
+    section:"Shakes",
+    name:"Chocolate Shake",
+    price:149,
+    description:"Deep, creamy, and satisfying chocolate goodness crafted perfectly for pure cocoa lovers."
+},
+
+{
+    category:"shakes",
+    section:"Shakes",
+    name:"Strawberry Oreo Shake",
+    price:179,
+    description:"An incredible fusion shake mixing fruity strawberry pulp with the rich crunch of chocolate Oreo biscuits."
+},
+
+{
+    category:"shakes",
+    section:"Shakes",
+    name:"Mango Cheese Shake",
+    price:179,
+    description:"A premium gourmet shake combining luscious mango with the rich, velvety tang of real cream cheese."
+},
+
+{
+    category:"shakes",
+    section:"Shakes",
+    name:"Mango Mastani Shake",
+    price:179,
+    description:"Pune's famous thick mango shake served grandly, topped with premium nuts and extra ice cream."
+},
+
+{
+    category:"shakes",
+    section:"Shakes",
+    name:"Blueberry Shake",
+    price:149,
+    description:"A smooth, antioxidant-rich shake with the bold, sweet, and tangy profile of wild blueberries."
+},
+
+{
+    category:"shakes",
+    section:"Shakes",
+    name:"KitKat Chocolate Shake",
+    price:159,
+    description:"A rich chocolate shake blended with creamy chocolate ice cream and crunchy KitKat pieces."
+},
+
+/* MOCKTAILS */
+
+{
+    category:"mocktails",
+    section:"Mocktails",
+    name:"Virgin Mojito",
+    price:129,
+    description:"The ultimate refresher containing freshly muddled mint leaves and lime wedges topped with bubbly soda."
+},
+
+{
+    category:"mocktails",
+    section:"Mocktails",
+    name:"Watermelon Smash",
+    price:129,
+    description:"A crisp summer beverage made of sweet watermelon juice smashed with subtle hint of mint."
+},
+
+{
+    category:"mocktails",
+    section:"Mocktails",
+    name:"Blood Orange",
+    price:139,
+    description:"A visually stunning and deeply refreshing citrus drink highlighting tangy blood orange extract."
+},
+
+{
+    category:"mocktails",
+    section:"Mocktails",
+    name:"Cold Blue",
+    price:139,
+    description:"An icy, crisp mocktail showcasing the sweet and citrusy tones of Blue Curacao."
+},
+
+{
+    category:"mocktails",
+    section:"Mocktails",
+    name:"Blueberry Mojito",
+    price:129,
+    description:"A fruity, wild twist on the classic mojito, bursting with sweet blueberry flavors."
+},
+
+{
+    category:"mocktails",
+    section:"Mocktails",
+    name:"Strawberry Mojito",
+    price:139,
+    description:"Sweet, sun-ripened strawberries muddled expertly with zesty lime and cooling garden mint."
+},
+
+{
+    category:"mocktails",
+    section:"Mocktails",
+    name:"Lemon Ice Tea",
+    price:130,
+    description:"Classic chilled black tea perfectly balanced with a sharp, refreshing squeeze of natural lemon juice."
+},
+
+{
+    category:"mocktails",
+    section:"Mocktails",
+    name:"Peach Ice Tea",
+    price:135,
+    description:"Soothing iced black tea elegantly infused with the soft, sweet, and aromatic flavor of juicy peaches."
+},
+
+/* SANDWICHES */
+
+{
+    category:"sandwiches",
+    section:"Sandwiches",
+    name:"Veg Cheese Sandwich",
+    price:99,
+    description:"Freshly sliced crunchy garden vegetables layered with melted cheese and grilled to perfection."
+},
+
+{
+    category:"sandwiches",
+    section:"Sandwiches",
+    name:"Paneer Cheese Sandwich",
+    price:99,
+    description:"Spiced cottage cheese (paneer) cubes and double cheese packed together inside crispy grilled bread toast."
+},
+
+{
+    category:"sandwiches",
+    section:"Sandwiches",
+    name:"Veg Cheese Corn Sandwich",
+    price:109,
+    description:"A creamy, comforting sandwich loaded with golden sweet corn and molten cheese mix."
+},
+
+{
+    category:"sandwiches",
+    section:"Sandwiches",
+    name:"Potato Sandwich",
+    price:129,
+    description:"A satisfying traditional filling of seasoned mashed potatoes with Indian aromatic street spices."
+},
+
+{
+    category:"sandwiches",
+    section:"Sandwiches",
+    name:"Tripple Deker Sandwich",
+    price:159,
+    description:"A massive 3-layered club sandwich stacked with fresh veggies, paneer, multiple house sauces, and cheese."
+},
+
+{
+    category:"sandwiches",
+    section:"Sandwiches",
+    name:"Veg Plain Sandwich",
+    price:49,
+    description:"Simple, light, and fresh ungrilled sandwich spread with rich butter and fresh green garden salad."
+},
+
+{
+    category:"sandwiches",
+    section:"Sandwiches",
+    name:"Special Sandwich",
+    price:79,
+    description:"Our chef's unique recipe featuring secret house-made dressing and freshly roasted ingredients."
+},
+
+/* TOAST & WRAPS */
+
+{
+    category:"wraps",
+    section:"Toast & Wraps",
+    name:"Cheese Garlic Bread",
+    price:99,
+    description:"Toasted artisan bread slices rubbed with aromatic garlic butter and blanketed in premium melted cheese."
+},
+
+{
+    category:"wraps",
+    section:"Toast & Wraps",
+    name:"Veg Cheese Garlic Bread",
+    price:109,
+    description:"Our standard cheese garlic bread loaded generously with crunchy sweet corn, capsicum, and olives."
+},
+
+{
+    category:"wraps",
+    section:"Toast & Wraps",
+    name:"Zesty Paneer Wrap",
+    price:139,
+    description:"Crispy grilled soft tortilla wrap rolling up tandoori marinated paneer and crunchy spiced onions."
+},
+
+{
+    category:"wraps",
+    section:"Toast & Wraps",
+    name:"Vegetable Burrito",
+    price:149,
+    description:"A wholesome Mexican wrap packed with seasoned rice, savory beans, cheese, and fresh tangy salsa."
+},
+
+/* BURGERS */
+
+{
+    category:"burgers",
+    section:"Burgers",
+    name:"Veg Burger",
+    price:69,
+    description:"Crispy herb-seasoned golden vegetable patty placed inside soft toasted sesame buns with dressing."
+},
+
+{
+    category:"burgers",
+    section:"Burgers",
+    name:"Veg Cheese Burger",
+    price:109,
+    description:"The ultimate classic veg burger enhanced with a thick layer of melted cheddar cheese slice."
+},
+
+{
+    category:"burgers",
+    section:"Burgers",
+    name:"Basera Big Brown Burger",
+    price:159,
+    description:"Our oversized signature burger featuring dual high-protein crisped patties and double cheese sheets."
+},
+
+{
+    category:"burgers",
+    section:"Burgers",
+    name:"Veg Hot Dog",
+    price:59,
+    description:"Soft elongated hot dog bun holding a grilled vegetable sausage, drizzled with mustard and ketchup."
+},
+
+{
+    category:"burgers",
+    section:"Burgers",
+    name:"Paneer Mint Magic Burger",
+    price:179,
+    description:"A beautiful fusion burger holding a thick crispy-fried paneer slab drizzled with refreshing mint mayo."
+},
+
+/* PASTA */
+
+{
+    category:"pasta",
+    section:"Pasta",
+    name:"Alfredo White Sauce",
+    price:199,
+    description:"Rich and luxurious penne pasta tossed in a velvety sauce made of fresh cream, butter, and cheese."
+},
+
+{
+    category:"pasta",
+    section:"Pasta",
+    name:"Arrabiata Red Sauce",
+    price:199,
+    description:"Fiery Italian pasta cooked in a slow-brewed spicy tangy plum tomato gravy infused with garlic and red chilies."
+},
+
+{
+    category:"pasta",
+    section:"Pasta",
+    name:"Pink Sauce",
+    price:209,
+    description:"The perfect creamy compromise combining our rich white Alfredo and tangy tomato Arrabiata sauces."
+},
+
+{
+    category:"pasta",
+    section:"Pasta",
+    name:"Mac & Cheese",
+    price:249,
+    description:"Gooey macaroni pasta baked beautifully in a highly indulgent, multi-cheese cream sauce mixture."
+},
+
+{
+    category:"pasta",
+    section:"Pasta",
+    name:"Al Fungi",
+    price:239,
+    description:"An earthy and savory pasta preparation loaded beautifully with fresh sautéed button mushrooms."
+},
+
+{
+    category:"pasta",
+    section:"Pasta",
+    name:"Pesto Sauce Pasta",
+    price:259,
+    description:"A highly aromatic bright green pesto tossed in rich basil leaves, olive oil, pine nuts, and parmesan mix."
+},
+
+/* PIZZAS */
+
+{
+    category:"pizza",
+    section:"Pizzas",
+    name:"Basera Special Exotica",
+    price:199,
+    description:"Our signature hand-tossed artisan pizza loaded with premium colorful foreign vegetables and cheese."
+},
+
+{
+    category:"pizza",
+    section:"Pizzas",
+    name:"Freaky Chilly",
+    price:189,
+    description:"A fiery pizza designed for spice lovers, loaded with dynamic hot peppers and spicy seasoning."
+},
+
+{
+    category:"pizza",
+    section:"Pizzas",
+    name:"Super Green",
+    price:179,
+    description:"A healthy yet delicious fresh pizza topped with crisp, green garden vegetables and herbs."
+},
+
+{
+    category:"pizza",
+    section:"Pizzas",
+    name:"Margherita",
+    price:149,
+    description:"A timeless classic pizza topped with tangy tomato sauce, fresh mozzarella, and basil."
+},
+
+{
+    category:"pizza",
+    section:"Pizzas",
+    name:"Basera Kids Special",
+    price:209,
+    description:"A mild, sweet-style pizza loaded with gold
