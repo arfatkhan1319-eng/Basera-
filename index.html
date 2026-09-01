@@ -677,13 +677,13 @@ const data = [
     499
   ],
   [
-    "RESO BAUL",
+    "RICE BOWL",
     "Reso Mexican",
     "A vibrant rice bowl featuring zesty Mexican spiced rice, refried beans, sweet corn and hot salsa.",
     159
   ],
   [
-    "RESO BAUL",
+    "RICE BOWL",
     "Reso Italian",
     "A comforting rice bowl cooked in creamy cheese and aromatic Mediterranean herbs.",
     179
@@ -829,14 +829,16 @@ function selectCategory(category){
     render();
     window.scrollTo({top:0, behavior:"smooth"});
 }
-
 function render(){
     const q = document.getElementById("search").value.trim().toLowerCase();
 
-    const filtered = data.filter(x =>
-        (cat === "All" || x[0] === cat) &&
-        (x[1].toLowerCase().includes(q) || x[2].toLowerCase().includes(q))
-    );
+    const filtered = data.filter(x => {
+        const matchesSearch = x[1].toLowerCase().includes(q) || x[2].toLowerCase().includes(q);
+        if (q) {
+            return matchesSearch; // Search across all categories when typing in search bar
+        }
+        return (cat === "All" || x[0] === cat);
+    });
 
     if(!filtered.length){
         document.getElementById("menu").innerHTML = `
@@ -846,10 +848,10 @@ function render(){
     }
 
     document.getElementById("menu").innerHTML = `
-        <h2>${cat === "All" ? "Our Menu" : cat}</h2>
+        <h2>${q ? "Search Results" : (cat === "All" ? "Our Menu" : cat)}</h2>
         <div class="count">${filtered.length} item${filtered.length === 1 ? "" : "s"}</div>
         <div class="grid">
-            ${filtered.map((x,i) => `
+            ${filtered.map((x) => `
                 <div class="item">
                     <div class="info">
                         <div class="name">
@@ -858,8 +860,6 @@ function render(){
                         </div>
                         <div class="desc">${escapeHtml(x[2])}</div>
                         <button class="add" onclick="add(${
-                            data.indexOf(x)
-                        }, ${
                             JSON.stringify(x[1])
                         }, ${x[3]})">Add to Order</button>
                     </div>
@@ -878,9 +878,16 @@ function escapeHtml(value){
         .replace(/'/g,"&#039;");
 }
 
-function add(index,name,price){
-    cart.push([name,price]);
-    document.getElementById("cart").textContent = `🛒 Cart (${cart.length})`;
+function add(name, price){
+    const existing = cart.find(item => item[0] === name);
+    if(existing){
+        existing[2] += 1;
+    } else {
+        cart.push([name, price, 1]);
+    }
+    
+    const totalCount = cart.reduce((sum, item) => sum + item[2], 0);
+    document.getElementById("cart").textContent = `🛒 Cart (${totalCount})`;
 }
 
 function showCart(){
@@ -889,10 +896,10 @@ function showCart(){
         return;
     }
 
-    const total = cart.reduce((sum,item) => sum + item[1], 0);
+    const total = cart.reduce((sum, item) => sum + (item[1] * item[2]), 0);
 
-    const order = cart.map((item,index) =>
-        `${index + 1}. ${item[0]} - ₹${item[1]}`
+    const order = cart.map((item, index) =>
+        `${index + 1}. ${item[0]} (x${item[2]}) - ₹${item[1] * item[2]}`
     ).join("\n");
 
     const message = `Hello BASERA! 👋
@@ -919,6 +926,17 @@ render();
 </body>
 </html>
 
+function render(){
+    const q = document.getElementById("search").value.trim().toLowerCase();
 
+    const filtered = data.filter(x => {
+        const matchesSearch = x[1].toLowerCase().includes(q) || x[2].toLowerCase().includes(q);
+        if (q) {
+            return matchesSearch; // Search across all categories when typing in search bar
+        }
+        return (cat === "All" || x[0] === cat);
+    });
 
-
+    if(!filtered.length){
+        document.getElementById("menu").innerHTML = `
+            <div class="empty">No items found.<br>Try anothe
