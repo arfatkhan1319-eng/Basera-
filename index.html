@@ -1061,4 +1061,205 @@ function filterMenu(category,button){
 
     document.getElementById("search").value = "";
 
-    if(category === "all"){
+    if(category === "all"){        displayMenu(menuData);
+
+    } else {
+
+        const filtered = menuData.filter(item =>
+            item.category === category
+        );
+
+        displayMenu(filtered);
+
+    }
+}
+
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+function searchMenu(){
+
+    const searchText =
+        document.getElementById("search").value
+        .toLowerCase()
+        .trim();
+
+    if(searchText === ""){
+
+        filterMenu(
+            currentCategory,
+            document.querySelector(".categories button.active")
+        );
+
+        return;
+    }
+
+    const filtered = menuData.filter(item => {
+
+        return (
+            item.name.toLowerCase().includes(searchText) ||
+            item.description.toLowerCase().includes(searchText) ||
+            item.section.toLowerCase().includes(searchText)
+        );
+
+    });
+
+    displayMenu(filtered);
+}
+
+
+/* ==========================================
+   CART
+========================================== */
+
+function addItem(name, price){
+
+    cart.push({
+        name:name,
+        price:price
+    });
+
+    updateCart();
+
+}
+
+
+function updateCart(){
+
+    document.getElementById("count").innerText =
+        cart.length;
+
+    const total =
+        cart.reduce((sum,item) => sum + item.price,0);
+
+    document.getElementById("total").innerText =
+        total;
+
+}
+
+
+/* ==========================================
+   ORDER MODAL
+========================================== */
+
+function openOrder(){
+
+    const modal =
+        document.getElementById("modal");
+
+    const orderList =
+        document.getElementById("orderList");
+
+    orderList.innerHTML = "";
+
+    if(cart.length === 0){
+
+        orderList.innerHTML = `
+            <div class="no-items">
+                Your order is empty.
+            </div>
+        `;
+
+    } else {
+
+        cart.forEach((item,index) => {
+
+            const div =
+                document.createElement("div");
+
+            div.className = "order-item";
+
+            div.innerHTML = `
+
+                <span>
+                    ${index + 1}. ${item.name}
+                </span>
+
+                <strong>
+                    ₹${item.price}
+                </strong>
+
+            `;
+
+            orderList.appendChild(div);
+
+        });
+
+    }
+
+    const total =
+        cart.reduce((sum,item) => sum + item.price,0);
+
+    document.getElementById("modalTotal").innerText =
+        total;
+
+    modal.style.display = "flex";
+
+}
+
+
+function closeOrder(){
+
+    document.getElementById("modal").style.display =
+        "none";
+
+}
+
+
+/* ==========================================
+   PLACE ORDER
+========================================== */
+
+function placeOrder(){
+
+    if(cart.length === 0){
+
+        alert("Please add at least one item.");
+
+        return;
+
+    }
+
+    const total =
+        cart.reduce((sum,item) => sum + item.price,0);
+
+    let message =
+        "Hello BASERA! I would like to place an order:%0A%0A";
+
+    cart.forEach((item,index) => {
+
+        message +=
+            `${index + 1}. ${item.name} - ₹${item.price}%0A`;
+
+    });
+
+    message +=
+        `%0ATotal: ₹${total}`;
+
+    /*
+       CHANGE THIS NUMBER TO BASERA'S
+       WHATSAPP NUMBER
+    */
+
+    const whatsappNumber = "919999999999";
+
+    window.open(
+        `https://wa.me/${whatsappNumber}?text=${message}`,
+        "_blank"
+    );
+
+}
+
+
+/* ==========================================
+   START WEBSITE
+========================================== */
+
+displayMenu(menuData);
+
+</script>
+
+</body>
+</html>
