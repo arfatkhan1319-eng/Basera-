@@ -6,242 +6,407 @@
 
 <title>BASERA • Digital Menu</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
 
 *{
     box-sizing:border-box;
 }
 
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#0f0f0f;
-    color:#fff;
+html{
+    scroll-behavior:smooth;
 }
 
+body{
+    margin:0;
+    background:#f6f1e8;
+    color:#30271f;
+    font-family:'Poppins',sans-serif;
+}
+
+/* HEADER */
+
 header{
-    padding:30px 18px 20px;
+    background:#211a14;
+    color:#f7efe3;
     text-align:center;
-    background:linear-gradient(145deg,#191919,#0b0b0b);
+    padding:45px 20px 55px;
 }
 
 .logo{
-    font-size:38px;
-    font-weight:900;
-    letter-spacing:4px;
+    font-family:'Playfair Display',serif;
+    font-size:54px;
+    font-weight:700;
+    letter-spacing:7px;
 }
 
 .tag{
-    color:#aaa;
-    margin:8px 0 20px;
-    font-size:14px;
+    margin-top:10px;
+    font-size:15px;
+    letter-spacing:6px;
+    color:#d9cdbd;
+}
+
+/* SEARCH */
+
+.search-wrap{
+    background:#f6f1e8;
+    padding:40px 32px 25px;
 }
 
 .search{
+    display:block;
     width:100%;
-    max-width:560px;
-    padding:14px 16px;
-    border:1px solid #333;
-    border-radius:14px;
-    background:#191919;
-    color:#fff;
-    font-size:16px;
+    max-width:900px;
+    margin:auto;
+
+    padding:20px 30px;
+
+    border:1px solid #cbbda9;
+    border-radius:40px;
+
+    background:#fffdf9;
+    color:#30271f;
+
+    font-family:'Poppins',sans-serif;
+    font-size:18px;
+
     outline:none;
 }
 
 .search::placeholder{
-    color:#888;
+    color:#777;
 }
 
 .search:focus{
-    border-color:#e63946;
+    border-color:#6c4b32;
+}
+
+/* CATEGORY NAV */
+
+.nav-wrap{
+    background:#f6f1e8;
+    padding:15px 25px 30px;
+    overflow-x:auto;
 }
 
 nav{
-    position:sticky;
-    top:0;
-    z-index:5;
     display:flex;
-    gap:8px;
+    gap:16px;
+    max-width:1000px;
+    margin:auto;
+
     overflow-x:auto;
-    padding:12px;
-    background:#101010;
-    border-bottom:1px solid #222;
+    scrollbar-width:none;
 }
 
 nav::-webkit-scrollbar{
-    height:4px;
+    display:none;
 }
 
 nav button{
-    white-space:nowrap;
-    border:1px solid #333;
-    background:#191919;
-    color:#ddd;
-    padding:10px 15px;
-    border-radius:20px;
+    flex-shrink:0;
+
+    padding:13px 28px;
+
+    border:1px solid #bbaa95;
+    border-radius:30px;
+
+    background:transparent;
+    color:#4b3a2c;
+
+    font-family:'Poppins',sans-serif;
+    font-size:16px;
+
     cursor:pointer;
 }
 
 nav button.active{
-    background:#e63946;
-    color:#fff;
-    border-color:#e63946;
+    background:#302117;
+    color:white;
+    border-color:#302117;
 }
+
+/* MAIN */
 
 main{
-    max-width:850px;
+    max-width:1000px;
     margin:auto;
-    padding:18px;
-    padding-bottom:110px;
+    padding:25px 32px 150px;
 }
 
-h2{
-    margin:20px 0 12px;
-    font-size:26px;
+.category-title{
+    font-family:'Playfair Display',serif;
+    font-size:42px;
+    margin:25px 0 5px;
+    color:#30271f;
 }
 
 .count{
-    color:#888;
-    font-size:13px;
-    margin-bottom:12px;
+    color:#8a7a69;
+    font-size:14px;
+    margin-bottom:20px;
 }
+
+/* MENU GRID */
 
 .grid{
     display:grid;
-    gap:12px;
+    gap:28px;
 }
+
+/* MENU CARD */
 
 .item{
-    display:flex;
-    justify-content:space-between;
-    gap:14px;
-    padding:15px;
-    background:#181818;
-    border:1px solid #292929;
-    border-radius:16px;
+    background:#fffdf9;
+    border:1px solid #ded4c6;
+    border-radius:14px;
+
+    padding:30px 35px;
+
+    box-shadow:0 4px 18px rgba(65,45,25,0.04);
 }
 
-.info{
-    flex:1;
-    min-width:0;
+.item-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
 }
 
 .name{
-    font-size:18px;
-    font-weight:700;
-}
-
-.desc{
-    font-size:13px;
-    color:#999;
-    margin:6px 0;
-    line-height:1.45;
+    font-family:'Playfair Display',serif;
+    font-size:30px;
+    line-height:1.2;
+    color:#30271f;
 }
 
 .price{
-    font-weight:800;
-    font-size:16px;
-    margin-top:7px;
+    font-size:22px;
+    font-weight:600;
+    white-space:nowrap;
+    color:#30271f;
 }
 
 .veg{
-    font-size:10px;
-    border:1px solid #319b54;
-    color:#61d184;
-    padding:2px 6px;
-    border-radius:8px;
-    margin-left:6px;
+    display:block;
+    color:#378a4b;
+    font-family:'Poppins',sans-serif;
+    font-size:14px;
+    margin-top:7px;
 }
 
+.veg::before{
+    content:"● ";
+}
+
+.desc{
+    color:#74695f;
+    font-size:16px;
+    line-height:1.8;
+    margin:25px 0;
+}
+
+/* ADD BUTTON */
+
 .add{
-    align-self:center;
-    border:0;
-    background:#e63946;
-    color:#fff;
-    padding:9px 14px;
-    border-radius:10px;
-    font-weight:bold;
+    width:100%;
+
+    padding:15px;
+
+    border:1px solid #30271f;
+    border-radius:8px;
+
+    background:transparent;
+    color:#30271f;
+
+    font-family:'Poppins',sans-serif;
+    font-size:17px;
+
     cursor:pointer;
+
+    transition:0.2s;
+}
+
+.add:hover{
+    background:#30271f;
+    color:white;
 }
 
 .add:active{
-    transform:scale(.95);
+    transform:scale(.98);
 }
 
-#cart{
-    position:fixed;
-    right:16px;
-    bottom:18px;
-    z-index:10;
-    background:#e63946;
-    color:#fff;
-    border:0;
-    padding:14px 18px;
-    border-radius:30px;
-    font-weight:bold;
-    box-shadow:0 8px 25px #000;
-    cursor:pointer;
-}
+/* WHATSAPP */
 
 .whatsapp{
     display:block;
-    width:calc(100% - 36px);
-    max-width:814px;
-    margin:10px auto 25px;
-    padding:15px;
-    text-align:center;
+
+    max-width:930px;
+    margin:0 auto 50px;
+
+    padding:20px;
+
     background:#25D366;
     color:white;
+
     text-decoration:none;
-    border-radius:14px;
-    font-weight:bold;
-    font-size:16px;
+    text-align:center;
+
+    border-radius:15px;
+
+    font-size:20px;
+    font-weight:600;
+
+    box-shadow:0 6px 20px rgba(0,0,0,.12);
 }
+
+/* CART */
+
+#cart{
+    position:fixed;
+
+    right:22px;
+    bottom:22px;
+
+    z-index:20;
+
+    border:0;
+    border-radius:35px;
+
+    padding:17px 25px;
+
+    background:#e83d4f;
+    color:white;
+
+    font-family:'Poppins',sans-serif;
+    font-size:17px;
+    font-weight:600;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+
+    cursor:pointer;
+}
+
+/* FOOTER */
 
 footer{
     text-align:center;
-    color:#777;
-    padding:35px;
-    line-height:1.6;
+
+    background:#211a14;
+    color:#a99d90;
+
+    padding:45px 20px;
+
+    line-height:2;
+
+    font-size:15px;
 }
+
+footer b{
+    font-family:'Playfair Display',serif;
+    color:#ddd0c0;
+    font-size:24px;
+}
+
+/* EMPTY */
 
 .empty{
     text-align:center;
-    color:#888;
-    padding:40px 10px;
+    padding:80px 20px;
+    color:#8a7a69;
+    font-size:17px;
 }
+
+/* MOBILE */
 
 @media(max-width:600px){
 
+    header{
+        padding:38px 18px 45px;
+    }
+
     .logo{
-        font-size:34px;
+        font-size:42px;
+        letter-spacing:5px;
+    }
+
+    .tag{
+        font-size:12px;
+        letter-spacing:4px;
+    }
+
+    .search-wrap{
+        padding:30px 32px 20px;
+    }
+
+    .search{
+        padding:18px 24px;
+        font-size:16px;
+    }
+
+    .nav-wrap{
+        padding:12px 32px 25px;
+    }
+
+    nav{
+        gap:14px;
+    }
+
+    nav button{
+        padding:12px 25px;
+        font-size:15px;
+    }
+
+    main{
+        padding:20px 32px 140px;
+    }
+
+    .category-title{
+        font-size:35px;
     }
 
     .item{
-        padding:14px;
+        padding:27px 35px;
     }
 
     .name{
-        font-size:17px;
+        font-size:27px;
+    }
+
+    .price{
+        font-size:19px;
     }
 
     .desc{
-        font-size:12px;
+        font-size:14px;
+        line-height:1.8;
+        margin:22px 0;
     }
 
-    .add{
-        padding:8px 12px;
+    .whatsapp{
+        margin-left:29px;
+        margin-right:29px;
+        font-size:17px;
     }
 
+    #cart{
+        right:15px;
+        bottom:18px;
+        padding:15px 21px;
+    }
 }
 
 </style>
 </head>
 
-
 <body>
 
+<!-- HEADER -->
 
 <header>
 
@@ -250,24 +415,42 @@ footer{
     </div>
 
     <div class="tag">
-        Eat • Talk • Enjoy
+        EAT • TALK • ENJOY
     </div>
-
-    <input
-        id="search"
-        class="search"
-        placeholder="Search your favourite dish..."
-        oninput="render()"
-    >
 
 </header>
 
 
-<nav id="nav"></nav>
+<!-- SEARCH -->
 
+<div class="search-wrap">
+
+    <input
+        id="search"
+        class="search"
+        type="text"
+        placeholder="Search your favourite dish..."
+        oninput="renderMenu()"
+    >
+
+</div>
+
+
+<!-- CATEGORY BUTTONS -->
+
+<div class="nav-wrap">
+
+    <nav id="nav"></nav>
+
+</div>
+
+
+<!-- MENU -->
 
 <main id="menu"></main>
 
+
+<!-- WHATSAPP -->
 
 <a
     class="whatsapp"
@@ -278,16 +461,24 @@ footer{
 </a>
 
 
+<!-- CART -->
+
 <button id="cart" onclick="showCart()">
     🛒 Cart (0)
 </button>
 
 
+<!-- FOOTER -->
+
 <footer>
 
-    <b>BASERA</b><br>
+    <b>BASERA</b>
 
-    Good food. Good conversations. Good memories.<br>
+    <br>
+
+    Good food. Good conversations. Good memories.
+
+    <br>
 
     For orders & enquiries:
     +91 86044 23227
@@ -297,659 +488,296 @@ footer{
 
 <script>
 
-
-/* ==========================================
+/* ==================================================
    WHATSAPP NUMBER
-========================================== */
+================================================== */
 
 const WHATSAPP = "918604423227";
 
 
-/* ==========================================
-   BASERA 89 ITEMS
-========================================== */
+/* ==================================================
+   BASERA MENU — 89 ITEMS
+================================================== */
 
-const data = [
+const menuData = [
 
 /* HOT COFFEE */
 
-["HOT COFFEE","Cappuccino",
-"The timeless classic consisting of equal parts rich espresso, warm steamed milk, and thick, velvety foam.",
-109],
+["HOT COFFEE","Cappuccino","The timeless classic consisting of equal parts rich espresso, warm steamed milk, and thick, velvety foam.",109],
 
-["HOT COFFEE","Cafe Mocha",
-"A comforting sweet fusion of robust espresso, rich cocoa sauce, and velvety steamed milk.",
-109],
+["HOT COFFEE","Cafe Mocha","A comforting sweet fusion of robust espresso, rich cocoa sauce, and velvety steamed milk.",109],
 
-["HOT COFFEE","Americano",
-"Freshly extracted premium espresso shots diluted with clean hot water for a smooth, bold black coffee.",
-79],
+["HOT COFFEE","Americano","Freshly extracted premium espresso shots diluted with clean hot water for a smooth, bold black coffee.",79],
 
-["HOT COFFEE","Hazelnut Cappuccino",
-"Our classic cappuccino infused with a sweet, aromatic twist of premium roasted hazelnut syrup.",
-129],
+["HOT COFFEE","Hazelnut Cappuccino","Our classic cappuccino infused with a sweet, aromatic twist of premium roasted hazelnut syrup.",129],
 
-["HOT COFFEE","Caramel Cappuccino",
-"Rich espresso and steamed milk flavored with buttery caramel syrup, finished with a luscious foam.",
-129],
+["HOT COFFEE","Caramel Cappuccino","Rich espresso and steamed milk flavored with buttery caramel syrup, finished with a luscious foam.",129],
 
-["HOT COFFEE","Coffee Cafe Latte",
-"A mild and wonderfully smooth coffee experience combining fresh espresso and plenty of steamed milk.",
-109],
+["HOT COFFEE","Coffee Cafe Latte","A mild and wonderfully smooth coffee experience combining fresh espresso and plenty of steamed milk.",109],
 
-["HOT COFFEE","Vanilla Coffee",
-"Freshly brewed coffee infused with the delicate, sweet, and comforting fragrance of exotic vanilla extract.",
-129],
+["HOT COFFEE","Vanilla Coffee","Freshly brewed coffee infused with the delicate, sweet, and comforting fragrance of exotic vanilla extract.",129],
 
-["HOT COFFEE","Hot Chocolate Coffee",
-"An ultra-rich blend of artisan dark hot chocolate fused seamlessly with a warm kick of fresh espresso.",
-99],
+["HOT COFFEE","Hot Chocolate Coffee","An ultra-rich blend of artisan dark hot chocolate fused seamlessly with a warm kick of fresh espresso.",99],
 
 
 /* COLD BREWS */
 
-["COLD BREWS","Cafe Frape",
-"Rich coffee blended with milk, sugar, and ice cream until thick, smooth, and perfectly frosty.",
-139],
+["COLD BREWS","Cafe Frape","Rich coffee blended with milk, sugar, and ice cream until thick, smooth, and perfectly frosty.",139],
 
-["COLD BREWS","Ice Mocha",
-"A perfect blend of rich espresso and chocolate sauce with cold milk, served over ice.",
-129],
+["COLD BREWS","Ice Mocha","A perfect blend of rich espresso and chocolate sauce with cold milk, served over ice.",129],
 
-["COLD BREWS","Affogato",
-"A delightful dessert-coffee crossover featuring hot, intense espresso poured over cold vanilla ice cream.",
-99],
+["COLD BREWS","Affogato","A delightful dessert-coffee crossover featuring hot, intense espresso poured over cold vanilla ice cream.",99],
 
-["COLD BREWS","Ice Latte",
-"Smooth, bold espresso combined with refreshing chilled milk and served crisp over ice.",
-129],
+["COLD BREWS","Ice Latte","Smooth, bold espresso combined with refreshing chilled milk and served crisp over ice.",129],
 
-["COLD BREWS","Mocha Frappe",
-"An ultra-indulgent ice-blended coffee treat mixed with deep, premium chocolate syrup and whipped topping.",
-139],
+["COLD BREWS","Mocha Frappe","An ultra-indulgent ice-blended coffee treat mixed with deep, premium chocolate syrup and whipped topping.",139],
 
 
 /* SHAKES */
 
-["SHAKES","Strawberry Shake",
-"A creamy, vibrant shake packed with the refreshing and sweet taste of summer strawberries.",
-149],
+["SHAKES","Strawberry Shake","A creamy, vibrant shake packed with the refreshing and sweet taste of summer strawberries.",149],
 
-["SHAKES","Mango Shake",
-"Tropical indulgence featuring the luscious and sweet flavor of sun-ripened king mangos.",
-149],
+["SHAKES","Mango Shake","Tropical indulgence featuring the luscious and sweet flavor of sun-ripened king mangos.",149],
 
-["SHAKES","Pineapple Shake",
-"A tangy, sweet, and tropical shake that offers a beautifully unique refreshment.",
-149],
+["SHAKES","Pineapple Shake","A tangy, sweet, and tropical shake that offers a beautifully unique refreshment.",149],
 
-["SHAKES","Chocolate Oreo Shake",
-"An absolute favorite thick shake blended thoroughly with crunchy Oreo cookies and rich chocolate syrup.",
-159],
+["SHAKES","Chocolate Oreo Shake","An absolute favorite thick shake blended thoroughly with crunchy Oreo cookies and rich chocolate syrup.",159],
 
-["SHAKES","Vanilla Shake",
-"Classic, velvety, and elegant shake loaded with the fragrant essence of pure vanilla pods.",
-149],
+["SHAKES","Vanilla Shake","Classic, velvety, and elegant shake loaded with the fragrant essence of pure vanilla pods.",149],
 
-["SHAKES","Butter Scotch Shake",
-"Rich and buttery shake mixed with crunchy, sweet butterscotch nut pralines for an amazing texture.",
-149],
+["SHAKES","Butter Scotch Shake","Rich and buttery shake mixed with crunchy, sweet butterscotch nut pralines for an amazing texture.",149],
 
-["SHAKES","Chocolate Shake",
-"Deep, creamy, and satisfying chocolate goodness crafted perfectly for pure cocoa lovers.",
-149],
+["SHAKES","Chocolate Shake","Deep, creamy, and satisfying chocolate goodness crafted perfectly for pure cocoa lovers.",149],
 
-["SHAKES","Strawberry Oreo Shake",
-"An incredible fusion shake mixing fruity strawberry pulp with the rich crunch of chocolate Oreo biscuits.",
-179],
+["SHAKES","Strawberry Oreo Shake","An incredible fusion shake mixing fruity strawberry pulp with the rich crunch of chocolate Oreo biscuits.",179],
 
-["SHAKES","Mango Cheese Shake",
-"A premium gourmet shake combining luscious mango with the rich, velvety tang of real cream cheese.",
-179],
+["SHAKES","Mango Cheese Shake","A premium gourmet shake combining luscious mango with the rich, velvety tang of real cream cheese.",179],
 
-["SHAKES","Mango Mastani Shake",
-"Pune's famous thick mango shake served grandly, topped with premium nuts and extra ice cream.",
-179],
+["SHAKES","Mango Mastani Shake","Pune's famous thick mango shake served grandly, topped with premium nuts and extra ice cream.",179],
 
-["SHAKES","Blueberry Shake",
-"A smooth, antioxidant-rich shake with the bold, sweet, and tangy profile of wild blueberries.",
-149],
+["SHAKES","Blueberry Shake","A smooth, antioxidant-rich shake with the bold, sweet, and tangy profile of wild blueberries.",149],
 
-["SHAKES","KitKat Chocolate Shake",
-"A rich chocolate shake blended with creamy chocolate ice cream and crunchy KitKat pieces.",
-159],
+["SHAKES","KitKat Chocolate Shake","A rich chocolate shake blended with creamy chocolate ice cream and crunchy KitKat pieces.",159],
 
 
 /* MOCKTAILS */
 
-["MOCKTAILS","Virgin Mojito",
-"The ultimate refresher containing freshly muddled mint leaves and lime wedges topped with bubbly soda.",
-129],
+["MOCKTAILS","Virgin Mojito","The ultimate refresher containing freshly muddled mint leaves and lime wedges topped with bubbly soda.",129],
 
-["MOCKTAILS","Watermelon Smash",
-"A crisp summer beverage made of sweet watermelon juice smashed with subtle hint of mint.",
-129],
+["MOCKTAILS","Watermelon Smash","A crisp summer beverage made of sweet watermelon juice smashed with subtle hint of mint.",129],
 
-["MOCKTAILS","Blood Orange",
-"A visually stunning and deeply refreshing citrus drink highlighting tangy blood orange extract.",
-139],
+["MOCKTAILS","Blood Orange","A visually stunning and deeply refreshing citrus drink highlighting tangy blood orange extract.",139],
 
-["MOCKTAILS","Cold Blue",
-"An icy, crisp mocktail showcasing the sweet and citrusy tones of Blue Curacao.",
-139],
+["MOCKTAILS","Cold Blue","An icy, crisp mocktail showcasing the sweet and citrusy tones of Blue Curacao.",139],
 
-["MOCKTAILS","Blueberry Mojito",
-"A fruity, wild twist on the classic mojito, bursting with sweet blueberry flavors.",
-129],
+["MOCKTAILS","Blueberry Mojito","A fruity, wild twist on the classic mojito, bursting with sweet blueberry flavors.",129],
 
-["MOCKTAILS","Strawberry Mojito",
-"Sweet, sun-ripened strawberries muddled expertly with zesty lime and cooling garden mint.",
-139],
+["MOCKTAILS","Strawberry Mojito","Sweet, sun-ripened strawberries muddled expertly with zesty lime and cooling garden mint.",139],
 
-["MOCKTAILS","Lemon Ice Tea",
-"Classic chilled black tea perfectly balanced with a sharp, refreshing squeeze of natural lemon juice.",
-130],
+["MOCKTAILS","Lemon Ice Tea","Classic chilled black tea perfectly balanced with a sharp, refreshing squeeze of natural lemon juice.",130],
 
-["MOCKTAILS","Peach Ice Tea",
-"Soothing iced black tea elegantly infused with the soft, sweet, and aromatic flavor of juicy peaches.",
-135],
+["MOCKTAILS","Peach Ice Tea","Soothing iced black tea elegantly infused with the soft, sweet, and aromatic flavor of juicy peaches.",135],
 
 
 /* SANDWICHES */
 
-["SANDWICHES","Veg Cheese Sandwich",
-"Freshly sliced crunchy garden vegetables layered with melted cheese and grilled to perfection.",
-99],
+["SANDWICHES","Veg Cheese Sandwich","Freshly sliced crunchy garden vegetables layered with melted cheese and grilled to perfection.",99],
 
-["SANDWICHES","Paneer Cheese Sandwich",
-"Spiced cottage cheese paneer cubes and double cheese packed together inside crispy grilled bread toast.",
-99],
+["SANDWICHES","Paneer Cheese Sandwich","Spiced cottage cheese paneer cubes and double cheese packed together inside crispy grilled bread toast.",99],
 
-["SANDWICHES","Veg Cheese Corn Sandwich",
-"A creamy, comforting sandwich loaded with golden sweet corn and molten cheese mix.",
-109],
+["SANDWICHES","Veg Cheese Corn Sandwich","A creamy, comforting sandwich loaded with golden sweet corn and molten cheese mix.",109],
 
-["SANDWICHES","Potato Sandwich",
-"A satisfying traditional filling of seasoned mashed potatoes with Indian aromatic street spices.",
-129],
+["SANDWICHES","Potato Sandwich","A satisfying traditional filling of seasoned mashed potatoes with Indian aromatic street spices.",129],
 
-["SANDWICHES","Tripple Deker Sandwich",
-"A massive 3-layered club sandwich stacked with fresh veggies, paneer, multiple house sauces, and cheese.",
-159],
+["SANDWICHES","Tripple Deker Sandwich","A massive 3-layered club sandwich stacked with fresh veggies, paneer, multiple house sauces, and cheese.",159],
 
-["SANDWICHES","Veg Plain Sandwich",
-"Simple, light, and fresh ungrilled sandwich spread with rich butter and fresh green garden salad.",
-49],
+["SANDWICHES","Veg Plain Sandwich","Simple, light, and fresh ungrilled sandwich spread with rich butter and fresh green garden salad.",49],
 
-["SANDWICHES","Special Sandwich",
-"Our chef's unique recipe featuring secret house-made dressing and freshly roasted ingredients.",
-79],
+["SANDWICHES","Special Sandwich","Our chef's unique recipe featuring secret house-made dressing and freshly roasted ingredients.",79],
 
 
 /* TOAST & WRAPS */
 
-["TOAST & WRAPS","Cheese Garlic Bread",
-"Toasted artisan bread slices rubbed with aromatic garlic butter and blanketed in premium melted cheese.",
-99],
+["TOAST & WRAPS","Cheese Garlic Bread","Toasted artisan bread slices rubbed with aromatic garlic butter and blanketed in premium melted cheese.",99],
 
-["TOAST & WRAPS","Veg Cheese Garlic Bread",
-"Our standard cheese garlic bread loaded generously with crunchy sweet corn, capsicum, and olives.",
-109],
+["TOAST & WRAPS","Veg Cheese Garlic Bread","Our standard cheese garlic bread loaded generously with crunchy sweet corn, capsicum, and olives.",109],
 
-["TOAST & WRAPS","Zesty Paneer Wrap",
-"Crispy grilled soft tortilla wrap rolling up tandoori marinated paneer and crunchy spiced onions.",
-139],
+["TOAST & WRAPS","Zesty Paneer Wrap","Crispy grilled soft tortilla wrap rolling up tandoori marinated paneer and crunchy spiced onions.",139],
 
-["TOAST & WRAPS","Vegetable Burrito",
-"A wholesome Mexican wrap packed with seasoned rice, savory beans, cheese, and fresh tangy salsa.",
-149],
+["TOAST & WRAPS","Vegetable Burrito","A wholesome Mexican wrap packed with seasoned rice, savory beans, cheese, and fresh tangy salsa.",149],
 
 
 /* BURGERS */
 
-["BURGERS","Veg Burger",
-"Crispy herb-seasoned golden vegetable patty placed inside soft toasted sesame buns with dressing.",
-69],
+["BURGERS","Veg Burger","Crispy herb-seasoned golden vegetable patty placed inside soft toasted sesame buns with dressing.",69],
 
-["BURGERS","Veg Cheese Burger",
-"The ultimate classic veg burger enhanced with a thick layer of melted cheddar cheese slice.",
-109],
+["BURGERS","Veg Cheese Burger","The ultimate classic veg burger enhanced with a thick layer of melted cheddar cheese slice.",109],
 
-["BURGERS","Basera Big Brown Burger",
-"Our oversized signature burger featuring dual high-protein crisped patties and double cheese sheets.",
-159],
+["BURGERS","Basera Big Brown Burger","Our oversized signature burger featuring dual high-protein crisped patties and double cheese sheets.",159],
 
-["BURGERS","Veg Hot Dog",
-"Soft elongated hot dog bun holding a grilled vegetable sausage, drizzled with mustard and ketchup.",
-59],
+["BURGERS","Veg Hot Dog","Soft elongated hot dog bun holding a grilled vegetable sausage, drizzled with mustard and ketchup.",59],
 
-["BURGERS","Paneer Mint Magic Burger",
-"A beautiful fusion burger holding a thick crispy-fried paneer slab drizzled with refreshing mint mayo.",
-179],
+["BURGERS","Paneer Mint Magic Burger","A beautiful fusion burger holding a thick crispy-fried paneer slab drizzled with refreshing mint mayo.",179],
 
 
 /* PASTA */
 
-["PASTA","Alfredo White Sauce",
-"Rich and luxurious penne pasta tossed in a velvety sauce made of fresh cream, butter, and cheese.",
-199],
+["PASTA","Alfredo White Sauce","Rich and luxurious penne pasta tossed in a velvety sauce made of fresh cream, butter, and cheese.",199],
 
-["PASTA","Arrabiata Red Sauce",
-"Fiery Italian pasta cooked in a slow-brewed spicy tangy plum tomato gravy infused with garlic and red chilies.",
-199],
+["PASTA","Arrabiata Red Sauce","Fiery Italian pasta cooked in a slow-brewed spicy tangy plum tomato gravy infused with garlic and red chilies.",199],
 
-["PASTA","Pink Sauce",
-"The perfect creamy compromise combining our rich white Alfredo and tangy tomato Arrabiata sauces.",
-209],
+["PASTA","Pink Sauce","The perfect creamy compromise combining our rich white Alfredo and tangy tomato Arrabiata sauces.",209],
 
-["PASTA","Mac & Cheese",
-"Gooey macaroni pasta baked beautifully in a highly indulgent, multi-cheese cream sauce mixture.",
-249],
+["PASTA","Mac & Cheese","Gooey macaroni pasta baked beautifully in a highly indulgent, multi-cheese cream sauce mixture.",249],
 
-["PASTA","Al Fungi",
-"An earthy and savory pasta preparation loaded beautifully with fresh sautéed button mushrooms.",
-239],
+["PASTA","Al Fungi","An earthy and savory pasta preparation loaded beautifully with fresh sautéed button mushrooms.",239],
 
-["PASTA","Pesto Sauce Pasta",
-"A highly aromatic bright green pesto tossed in rich basil leaves, olive oil, pine nuts, and parmesan mix.",
-259],
+["PASTA","Pesto Sauce Pasta","A highly aromatic bright green pesto tossed in rich basil leaves, olive oil, pine nuts, and parmesan mix.",259],
 
 
 /* PIZZAS */
 
-["PIZZAS","Basera Special Exotica",
-"Our signature hand-tossed artisan pizza loaded with premium colorful foreign vegetables and cheese.",
-199],
+["PIZZAS","Basera Special Exotica","Our signature hand-tossed artisan pizza loaded with premium colorful foreign vegetables and cheese.",199],
 
-["PIZZAS","Freaky Chilly",
-"A fiery pizza designed for spice lovers, loaded with dynamic hot peppers and spicy seasoning.",
-189],
+["PIZZAS","Freaky Chilly","A fiery pizza designed for spice lovers, loaded with dynamic hot peppers and spicy seasoning.",189],
 
-["PIZZAS","Super Green",
-"A healthy yet delicious fresh pizza topped with crisp, green garden vegetables and herbs.",
-179],
+["PIZZAS","Super Green","A healthy yet delicious fresh pizza topped with crisp, green garden vegetables and herbs.",179],
 
-["PIZZAS","Margherita",
-"A timeless classic pizza topped with tangy tomato sauce, fresh mozzarella, and basil.",
-149],
+["PIZZAS","Margherita","A timeless classic pizza topped with tangy tomato sauce, fresh mozzarella, and basil.",149],
 
-["PIZZAS","Basera Kids Special",
-"A mild, sweet-style pizza loaded with golden corn kernels and extra mild mozzarella cheese strips.",
-209],
+["PIZZAS","Basera Kids Special","A mild, sweet-style pizza loaded with golden corn kernels and extra mild mozzarella cheese strips.",209],
 
-["PIZZAS","Funghi",
-"Classic Italian thin crust style pizza topped perfectly with earthy button mushrooms and cheese.",
-179],
+["PIZZAS","Funghi","Classic Italian thin crust style pizza topped perfectly with earthy button mushrooms and cheese.",179],
 
-["PIZZAS","Quattro Formaggi",
-"The ultimate treat for cheese enthusiasts featuring a luxury master blend of four distinct cheeses.",
-189],
+["PIZZAS","Quattro Formaggi","The ultimate treat for cheese enthusiasts featuring a luxury master blend of four distinct cheeses.",189],
 
-["PIZZAS","Tandoori Paneer Tikka",
-"An absolute favorite fusion masterpiece highlighting clay-oven roasted paneer tikka chunks.",
-229],
+["PIZZAS","Tandoori Paneer Tikka","An absolute favorite fusion masterpiece highlighting clay-oven roasted paneer tikka chunks.",229],
 
-["PIZZAS","Pesto Besto Pizza",
-"A beautiful green base pizza utilizing rich basil pesto paste instead of traditional tomato sauce.",
-239],
+["PIZZAS","Pesto Besto Pizza","A beautiful green base pizza utilizing rich basil pesto paste instead of traditional tomato sauce.",239],
 
 
 /* BREAKFAST */
 
-["BREAKFAST","Coffee and Paneer Puff",
-"A quick morning combo pairing a warm flaky layered baked savory paneer puff with hot robust coffee.",
-139],
+["BREAKFAST","Coffee and Paneer Puff","A quick morning combo pairing a warm flaky layered baked savory paneer puff with hot robust coffee.",139],
 
-["BREAKFAST","Kids Fun Meal",
-"A delightful combo specially planned for children containing a mild burger paired with a refreshing mojito.",
-179],
+["BREAKFAST","Kids Fun Meal","A delightful combo specially planned for children containing a mild burger paired with a refreshing mojito.",179],
 
-["BREAKFAST","King Size Meal",
-"The ultimate heavy feast for food lovers. Customize your satisfying platter with your favorite choices.",
-499],
+["BREAKFAST","King Size Meal","The ultimate heavy feast for food lovers. Customize your satisfying platter with your favorite choices.",499],
 
 
 /* RESO BAUL */
 
-["RESO BAUL","Reso Mexican",
-"A vibrant rice bowl featuring zesty Mexican spiced rice, refried beans, sweet corn and hot salsa.",
-159],
+["RESO BAUL","Reso Mexican","A vibrant rice bowl featuring zesty Mexican spiced rice, refried beans, sweet corn and hot salsa.",159],
 
-["RESO BAUL","Reso Italian",
-"A comforting rice bowl cooked in creamy cheese and aromatic Mediterranean herbs.",
-179],
+["RESO BAUL","Reso Italian","A comforting rice bowl cooked in creamy cheese and aromatic Mediterranean herbs.",179],
 
 
 /* COMBO OFFER */
 
-["COMBO OFFER","Paneer Pizza with Coke",
-"A perfect single-serving meal combo featuring a mini Paneer Pizza and a chilled Coke bottle.",
-199],
+["COMBO OFFER","Paneer Pizza with Coke","A perfect single-serving meal combo featuring a mini Paneer Pizza and a chilled Coke bottle.",199],
 
-["COMBO OFFER","Veg Burger with Coke",
-"Our most affordable, classic fast-food combination value meal pairing a burger with soft drink.",
-79],
+["COMBO OFFER","Veg Burger with Coke","Our most affordable, classic fast-food combination value meal pairing a burger with soft drink.",79],
 
-["COMBO OFFER","Margherita Pizza with Coke",
-"The timeless combination of cheesy premium Margherita pizza crust washed down with refreshing cold cola.",
-159],
+["COMBO OFFER","Margherita Pizza with Coke","The timeless combination of cheesy premium Margherita pizza crust washed down with refreshing cold cola.",159],
 
-["COMBO OFFER","French Fries Veg Burger and Coke",
-"The ultimate complete individual meal combining crispy salted fries, classic burger, and standard soft drink.",
-169],
+["COMBO OFFER","French Fries Veg Burger and Coke","The ultimate complete individual meal combining crispy salted fries, classic burger, and standard soft drink.",169],
 
 
 /* FRIES */
 
-["FRIES","French Fries",
-"Traditional potato finger strips deep-fried to a flawless golden crisp, lightly seasoned with refined sea salt.",
-99],
+["FRIES","French Fries","Traditional potato finger strips deep-fried to a flawless golden crisp, lightly seasoned with refined sea salt.",99],
 
-["FRIES","Peri Peri French Fries",
-"Golden crisp French fries tossed evenly in a highly fiery, tangy, and hot African Peri-Peri spice dust.",
-129],
+["FRIES","Peri Peri French Fries","Golden crisp French fries tossed evenly in a highly fiery, tangy, and hot African Peri-Peri spice dust.",129],
 
-["FRIES","Peri Peri Potato Crispers",
-"V-cut premium thick potato chunks fried extra crunchy and tossed in aggressive peri-peri spices.",
-139],
+["FRIES","Peri Peri Potato Crispers","V-cut premium thick potato chunks fried extra crunchy and tossed in aggressive peri-peri spices.",139],
 
 
 /* CHINESE */
 
-["CHINESE","Momos 5 pcs",
-"Steamed or pan-fried dumplings filled with fresh vegetables and aromatic spices.",
-89],
+["CHINESE","Momos 5 pcs","Steamed or pan-fried dumplings filled with fresh vegetables and aromatic spices.",89],
 
-["CHINESE","Veg Maggi",
-"Classic Maggi noodles tossed with mixed veggies, spices, and a touch of butter.",
-79],
+["CHINESE","Veg Maggi","Classic Maggi noodles tossed with mixed veggies, spices, and a touch of butter.",79],
 
-["CHINESE","Plain Maggi",
-"Simple and classic Maggi noodles with authentic taste.",
-49],
+["CHINESE","Plain Maggi","Simple and classic Maggi noodles with authentic taste.",49],
 
-["CHINESE","Noodles",
-"Stir-fried noodles with fresh vegetables, spring onions, and oriental sauces.",
-99],
+["CHINESE","Noodles","Stir-fried noodles with fresh vegetables, spring onions, and oriental sauces.",99],
 
-["CHINESE","Honey Chilli Potato",
-"Crispy potato fingers tossed in a sticky, sweet, and spicy honey chilli glaze.",
-149],
+["CHINESE","Honey Chilli Potato","Crispy potato fingers tossed in a sticky, sweet, and spicy honey chilli glaze.",149],
 
-["CHINESE","Chilly Potato",
-"Crispy potato sticks stir-fried with onions, capsicum, and spicy sauces.",
-139],
+["CHINESE","Chilly Potato","Crispy potato sticks stir-fried with onions, capsicum, and spicy sauces.",139],
 
-["CHINESE","Chilly Paneer Dry",
-"Crispy paneer preparation tossed with vegetables and spicy sauces.",
-179],
+["CHINESE","Chilly Paneer Dry","Crispy paneer preparation tossed with vegetables and spicy sauces.",179],
 
 
 /* OTHER */
 
-["OTHER","Normal Chai",
-"A classic cup of Indian tea, perfect for every mood.",
-15],
+["OTHER","Normal Chai","A classic cup of Indian tea, perfect for every mood.",15],
 
-["OTHER","Ilayachi Adrak Chai",
-"Fragrant tea infused with cardamom and ginger for a refreshing kick.",
-20],
+["OTHER","Ilayachi Adrak Chai","Fragrant tea infused with cardamom and ginger for a refreshing kick.",20],
 
-["OTHER","Masala Chai",
-"Traditional Indian tea brewed with aromatic spices and herbs.",
-25],
+["OTHER","Masala Chai","Traditional Indian tea brewed with aromatic spices and herbs.",25],
 
-["OTHER","Bun Makhhan",
-"Soft bun toasted with a generous layer of fresh butter.",
-25],
+["OTHER","Bun Makhhan","Soft bun toasted with a generous layer of fresh butter.",25],
 
-["OTHER","Poha",
-"Light and healthy flattened rice cooked with mild spices, peanuts, and herbs.",
-49],
+["OTHER","Poha","Light and healthy flattened rice cooked with mild spices, peanuts, and herbs.",49],
 
-["OTHER","Vada Pav",
-"Classic Indian street-style vada pav.",
-45]
+["OTHER","Vada Pav","Classic Indian street-style vada pav.",45]
 
 ];
 
 
-/* ==========================================
+/* ==================================================
    CART
-========================================== */
+================================================== */
 
-let cat = "All";
+let currentCategory = "All";
 let cart = [];
 
 
-/* ==========================================
+/* ==================================================
    CATEGORIES
-========================================== */
+================================================== */
 
-const cats = [
+const categories = [
     "All",
-    ...new Set(data.map(x => x[0]))
+    ...new Set(menuData.map(item => item[0]))
 ];
 
 
-/* ==========================================
-   NAVIGATION
-========================================== */
+/* ==================================================
+   RENDER CATEGORY BUTTONS
+================================================== */
 
-function nav(){
+function renderCategories(){
 
-    document.getElementById("nav").innerHTML =
-        cats.map(c => `
+    const nav = document.getElementById("nav");
 
+    nav.innerHTML = categories.map(category => {
+
+        return `
             <button
-                class="${c === cat ? "active" : ""}"
-                onclick="cat=${JSON.stringify(c)};nav();render()"
+                class="${category === currentCategory ? "active" : ""}"
+                onclick='selectCategory(${JSON.stringify(category)})'
             >
-                ${c}
+                ${category}
             </button>
-
-        `).join("");
-
-}
-
-
-/* ==========================================
-   DISPLAY MENU
-========================================== */
-
-function render(){
-
-    const q =
-        document
-        .getElementById("search")
-        .value
-        .trim()
-        .toLowerCase();
-
-
-    const filtered = data.filter(x =>
-
-        (cat === "All" || x[0] === cat) &&
-
-        (
-            x[1].toLowerCase().includes(q) ||
-            x[2].toLowerCase().includes(q)
-        )
-
-    );
-
-
-    if(filtered.length === 0){
-
-        document.getElementById("menu").innerHTML = `
-
-            <div class="empty">
-
-                No items found.<br>
-
-                Try another search.
-
-            </div>
-
         `;
 
-        return;
-
-    }
-
-
-    document.getElementById("menu").innerHTML = `
-
-        <h2>
-            ${cat === "All" ? "Our Menu" : cat}
-        </h2>
-
-        <div class="count">
-
-            ${filtered.length}
-            item${filtered.length === 1 ? "" : "s"}
-
-        </div>
-
-        <div class="grid">
-
-            ${filtered.map((x,i) => `
-
-                <div class="item">
-
-                    <div class="info">
-
-                        <div class="name">
-
-                            ${x[1]}
-
-                            <span class="veg">
-                                VEG
-                            </span>
-
-                        </div>
-
-                        <div class="desc">
-                            ${x[2]}
-                        </div>
-
-                        <div class="price">
-                            ₹${x[3]}
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="add"
-                        onclick="add(${i},${JSON.stringify(x[1])},${x[3]})"
-                    >
-                        ADD
-                    </button>
-
-                </div>
-
-            `).join("")}
-
-        </div>
-
-    `;
-
+    }).join("");
 }
 
 
-/* ==========================================
-   ADD TO CART
-========================================== */
+/* ==================================================
+   SELECT CATEGORY
+================================================== */
 
-function add(index,name,price){
+function selectCategory(category){
 
-    cart.push([
-        name,
-        price
-    ]);
+    currentCategory = category;
 
-    document.getElementById("cart").textContent =
-        `🛒 Cart (${cart.length})`;
+    renderCategories();
+    renderMenu();
 
-}
-
-
-/* ==========================================
-   SHOW CART
-========================================== */
-
-function showCart(){
-
-    if(!cart.length){
-
-        alert("Your cart is empty.");
-
-        return;
-
-    }
-
-
-    const total =
-        cart.reduce(
-            (sum,item) => sum + item[1],
-            0
-        );
-
-
-    const order =
-        cart.map((item,index) =>
-
-            `${index + 1}. ${item[0]} - ₹${item[1]}`
-
-        ).join("\n");
-
-
-    const message = `Hello BASERA! 👋
-
-I would like to place an order:
-
-${order}
-
-Total: ₹${total}
-
-Please confirm my order. Thank you!`;
-
-
-    if(
-        confirm(
-          order +
-
-"\n\nTotal: ₹" +
-
-total +
-
-"\n\nSend this order on WhatsApp?"
-
-)
-
-){
-
-window.open(
-
-"https://wa.me/" +
-
-WHATSAPP +
-
-"?text=" +
-
-encodeURIComponent (message),
-
-" blank"
-
-);
-
-START WEBSITE
-
-nav();
-
-render();
-
-</script>
-
-</body> </html>
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
