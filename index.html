@@ -1,295 +1,200 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BASERA • Digital Menu</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
-    background:#f6f1e8;
-    color:#2d241d;
-    font-family:'Poppins',sans-serif;
+margin:0;
+font-family:Arial,sans-serif;
+background:#0f0f0f;
+color:#fff
 }
 
 header{
-    background:#201912;
-    color:#f7ead5;
-    text-align:center;
-    padding:45px 20px 35px;
+padding:30px 18px 20px;
+text-align:center;
+background:linear-gradient(145deg,#191919,#0b0b0b)
 }
 
 .logo{
-    font-family:'Playfair Display',serif;
-    font-size:42px;
-    letter-spacing:5px;
+font-size:38px;
+font-weight:900;
+letter-spacing:4px
 }
 
-.tagline{
-    margin-top:8px;
-    font-size:12px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    opacity:.8;
+.tag{
+color:#aaa;
+margin:8px 0 20px;
+font-size:14px
 }
 
-.search-box{
-    max-width:600px;
-    margin:25px auto;
-    padding:0 20px;
+.search{
+width:100%;
+max-width:560px;
+padding:14px 16px;
+border:1px solid #333;
+border-radius:14px;
+background:#191919;
+color:#fff;
+font-size:16px;
+outline:none
 }
 
-.search-box input{
-    width:100%;
-    padding:15px 20px;
-    border:1px solid #c9bba7;
-    border-radius:30px;
-    background:#fffdf9;
-    outline:none;
-    font-size:14px;
+.search:focus{
+border-color:#e63946
 }
 
-.categories{
-    display:flex;
-    gap:10px;
-    overflow-x:auto;
-    padding:10px 20px 20px;
-    max-width:1100px;
-    margin:auto;
+nav{
+position:sticky;
+top:0;
+z-index:5;
+display:flex;
+gap:8px;
+overflow:auto;
+padding:12px;
+background:#101010;
+border-bottom:1px solid #222
 }
 
-.categories::-webkit-scrollbar{
-    height:4px;
+nav button{
+white-space:nowrap;
+border:1px solid #333;
+background:#191919;
+color:#ddd;
+padding:10px 15px;
+border-radius:20px;
+cursor:pointer
 }
 
-.categories button{
-    white-space:nowrap;
-    padding:10px 20px;
-    border-radius:25px;
-    border:1px solid #b49b7c;
-    background:transparent;
-    color:#4b3828;
-    cursor:pointer;
-    transition:.3s;
+nav button.active{
+background:#e63946;
+color:#fff;
+border-color:#e63946
 }
 
-.categories button.active,
-.categories button:hover{
-    background:#302217;
-    color:white;
+main{
+max-width:850px;
+margin:auto;
+padding:18px
 }
 
-.menu{
-    max-width:1100px;
-    margin:10px auto 100px;
-    padding:0 20px;
+h2{
+margin:20px 0 12px
 }
 
-.section-title{
-    font-family:'Playfair Display',serif;
-    font-size:30px;
-    margin:35px 0 18px;
-    border-bottom:1px solid #cdbfae;
-    padding-bottom:10px;
+.count{
+color:#888;
+font-size:13px;
+margin-bottom:12px
 }
 
-.items{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:18px;
+.grid{
+display:grid;
+gap:12px
 }
 
 .item{
-    background:#fffdf9;
-    border:1px solid #e3d8c8;
-    padding:22px;
-    border-radius:8px;
-    transition:.3s;
+display:flex;
+justify-content:space-between;
+gap:14px;
+padding:15px;
+background:#181818;
+border:1px solid #292929;
+border-radius:16px
 }
 
-.item:hover{
-    transform:translateY(-4px);
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+.info{
+flex:1;
+min-width:0
 }
 
-.item-top{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
+.name{
+font-size:18px;
+font-weight:700
 }
 
-.item-name{
-    font-family:'Playfair Display',serif;
-    font-size:20px;
+.desc{
+font-size:13px;
+color:#999;
+margin:6px 0;
+line-height:1.45
 }
 
 .price{
-    font-weight:600;
-    white-space:nowrap;
-}
-
-.description{
-    font-size:12px;
-    color:#766b60;
-    margin:8px 0 15px;
-    line-height:1.6;
-}
-
-.food-type{
-    display:inline-block;
-    font-size:11px;
-    margin-bottom:8px;
+font-weight:800;
+font-size:16px
 }
 
 .veg{
-    color:#27833b;
+font-size:10px;
+border:1px solid #319b54;
+color:#61d184;
+padding:2px 6px;
+border-radius:8px;
+margin-left:6px
 }
 
-.nonveg{
-    color:#b32b22;
+.add{
+align-self:center;
+border:0;
+background:#e63946;
+color:#fff;
+padding:9px 14px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer
 }
 
-.add-btn{
-    width:100%;
-    padding:10px;
-    border:1px solid #39291d;
-    background:transparent;
-    color:#39291d;
-    border-radius:5px;
-    cursor:pointer;
-    transition:.3s;
+.add:active{
+transform:scale(.95)
 }
 
-.add-btn:hover{
-    background:#39291d;
-    color:white;
+#cart{
+position:fixed;
+right:16px;
+bottom:18px;
+z-index:10;
+background:#e63946;
+color:#fff;
+border:0;
+padding:14px 18px;
+border-radius:30px;
+font-weight:bold;
+box-shadow:0 8px 25px #000;
+cursor:pointer
 }
 
-.order-bar{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    background:#201912;
-    color:white;
-    padding:15px 20px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:30px;
-    box-shadow:0 -5px 20px rgba(0,0,0,.15);
-    z-index:50;
-}
-
-.order-btn{
-    background:#e5c79d;
-    border:none;
-    padding:11px 25px;
-    border-radius:25px;
-    cursor:pointer;
-    font-weight:600;
-}
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.6);
-    justify-content:center;
-    align-items:center;
-    z-index:100;
-}
-
-.modal-content{
-    background:#fffdf9;
-    width:90%;
-    max-width:450px;
-    padding:30px;
-    border-radius:10px;
-    max-height:80vh;
-    overflow:auto;
-}
-
-.modal-title{
-    font-family:'Playfair Display',serif;
-    font-size:28px;
-    margin-bottom:20px;
-}
-
-.order-item{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    border-bottom:1px solid #ddd;
-    padding:12px 0;
-    font-size:14px;
-}
-
-.close{
-    float:right;
-    cursor:pointer;
-    font-size:22px;
-}
-
-.total{
-    font-size:20px;
-    font-weight:bold;
-    margin-top:20px;
-    display:flex;
-    justify-content:space-between;
-}
-
-.place-order{
-    width:100%;
-    padding:14px;
-    margin-top:20px;
-    background:#241b14;
-    color:white;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
+.whatsapp{
+display:block;
+width:calc(100% - 36px);
+max-width:814px;
+margin:10px auto 25px;
+padding:15px;
+text-align:center;
+background:#25D366;
+color:white;
+text-decoration:none;
+border-radius:14px;
+font-weight:bold;
+font-size:16px
 }
 
 footer{
-    text-align:center;
-    padding:35px 20px 90px;
-    color:#776b5e;
-    font-size:12px;
+text-align:center;
+color:#777;
+padding:35px;
+line-height:1.6
 }
 
-.no-items{
-    text-align:center;
-    padding:50px 20px;
-    color:#776b5e;
-}
-
-@media(max-width:600px){
-
-    .logo{
-        font-size:32px;
-    }
-
-    .section-title{
-        font-size:26px;
-    }
-
-    .items{
-        grid-template-columns:1fr;
-    }
-
-    .order-bar{
-        justify-content:space-between;
-        gap:10px;
-    }
+.empty{
+text-align:center;
+color:#888;
+padding:40px 10px
 }
 </style>
 </head>
@@ -297,969 +202,9 @@ footer{
 <body>
 
 <header>
-    <div class="logo">BASERA</div>
 
-    <div class="tagline">
-        Eat • Talk • Enjoy
-    </div>
-</header>
+<div class="logo">BASERA</div>
 
-
-<div class="search-box">
-    <input
-        type="text"
-        id="search"
-        placeholder="Search your favourite dish..."
-        oninput="searchMenu()"
-    >
-</div>
-
-
-<div class="categories">
-
-    <button class="active" onclick="filterMenu('all',this)">
-        All
-    </button>
-
-    <button onclick="filterMenu('coffee',this)">
-        Coffee
-    </button>
-
-    <button onclick="filterMenu('shakes',this)">
-        Shakes
-    </button>
-
-    <button onclick="filterMenu('mocktails',this)">
-        Mocktails
-    </button>
-
-    <button onclick="filterMenu('sandwiches',this)">
-        Sandwiches
-    </button>
-
-    <button onclick="filterMenu('wraps',this)">
-        Toast & Wraps
-    </button>
-
-    <button onclick="filterMenu('burgers',this)">
-        Burgers
-    </button>
-
-    <button onclick="filterMenu('pasta',this)">
-        Pasta
-    </button>
-
-    <button onclick="filterMenu('pizza',this)">
-        Pizza
-    </button>
-
-    <button onclick="filterMenu('breakfast',this)">
-        Breakfast
-    </button>
-
-    <button onclick="filterMenu('reso',this)">
-        Reso Baul
-    </button>
-
-    <button onclick="filterMenu('combo',this)">
-        Combos
-    </button>
-
-    <button onclick="filterMenu('fries',this)">
-        Fries
-    </button>
-
-    <button onclick="filterMenu('chinese',this)">
-        Chinese
-    </button>
-
-    <button onclick="filterMenu('other',this)">
-        Other
-    </button>
-
-</div>
-
-
-<main class="menu" id="menu"></main>
-
-
-<footer>
-    <p>BASERA</p>
-    <p>Good food. Good conversations. Good memories.</p>
-</footer>
-
-
-<div class="order-bar">
-
-    <div>
-        Items: <span id="count">0</span>
-    </div>
-
-    <div>
-        ₹<span id="total">0</span>
-    </div>
-
-    <button class="order-btn" onclick="openOrder()">
-        View Order
-    </button>
-
-</div>
-
-
-<div class="modal" id="modal">
-
-    <div class="modal-content">
-
-        <span class="close" onclick="closeOrder()">×</span>
-
-        <div class="modal-title">
-            Your Order
-        </div>
-
-        <div id="orderList"></div>
-
-        <div class="total">
-
-            <span>Total</span>
-
-            <span>
-                ₹<span id="modalTotal">0</span>
-            </span>
-
-        </div>
-
-        <button class="place-order" onclick="placeOrder()">
-            Place Order
-        </button>
-
-    </div>
-
-</div>
-
-
-<script>
-
-/* ==========================================
-   BASERA MENU DATA
-========================================== */
-
-const menuData = [
-
-/* ================= HOT COFFEE ================= */
-
-{
-category:"coffee",
-section:"Hot Coffee",
-name:"Cappuccino",
-price:109,
-description:"The timeless classic consisting of equal parts rich espresso, warm steamed milk, and thick, velvety foam."
-},
-
-{
-category:"coffee",
-section:"Hot Coffee",
-name:"Cafe Mocha",
-price:109,
-description:"A comforting sweet fusion of robust espresso, rich cocoa sauce, and velvety steamed milk."
-},
-
-{
-category:"coffee",
-section:"Hot Coffee",
-name:"Americano",
-price:79,
-description:"Freshly extracted premium espresso shots diluted with clean hot water for a smooth, bold black coffee."
-},
-
-{
-category:"coffee",
-section:"Hot Coffee",
-name:"Hazelnut Cappuccino",
-price:129,
-description:"Our classic cappuccino infused with a sweet, aromatic twist of premium roasted hazelnut syrup."
-},
-
-{
-category:"coffee",
-section:"Hot Coffee",
-name:"Caramel Cappuccino",
-price:129,
-description:"Rich espresso and steamed milk flavored with buttery caramel syrup, finished with a luscious foam."
-},
-
-{
-category:"coffee",
-section:"Hot Coffee",
-name:"Coffee Cafe Latte",
-price:109,
-description:"A mild and wonderfully smooth coffee experience combining fresh espresso and plenty of steamed milk."
-},
-
-{
-category:"coffee",
-section:"Hot Coffee",
-name:"Vanilla Coffee",
-price:129,
-description:"Freshly brewed coffee infused with the delicate, sweet, and comforting fragrance of exotic vanilla extract."
-},
-
-{
-category:"coffee",
-section:"Hot Coffee",
-name:"Hot Chocolate Coffee",
-price:99,
-description:"An ultra-rich blend of artisan dark hot chocolate fused seamlessly with a warm kick of fresh espresso."
-},
-
-/* ================= COLD BREWS ================= */
-
-{
-category:"coffee",
-section:"Cold Brews",
-name:"Cafe Frape",
-price:139,
-description:"Rich coffee blended with milk, sugar, and ice cream until thick, smooth, and perfectly frosty."
-},
-
-{
-category:"coffee",
-section:"Cold Brews",
-name:"Ice Mocha",
-price:129,
-description:"A perfect blend of rich espresso and chocolate sauce with cold milk, served over ice."
-},
-
-{
-category:"coffee",
-section:"Cold Brews",
-name:"Affogato",
-price:99,
-description:"A delightful dessert-coffee crossover featuring hot, intense espresso poured over cold vanilla ice cream."
-},
-
-{
-category:"coffee",
-section:"Cold Brews",
-name:"Ice Latte",
-price:129,
-description:"Smooth, bold espresso combined with refreshing chilled milk and served crisp over ice."
-},
-
-{
-category:"coffee",
-section:"Cold Brews",
-name:"Mocha Frappe",
-price:139,
-description:"An ultra-indulgent ice-blended coffee treat mixed with deep chocolate syrup and whipped topping."
-},
-
-/* ================= SHAKES ================= */
-
-{
-category:"shakes",
-section:"Shakes",
-name:"Strawberry Shake",
-price:149,
-description:"A creamy, vibrant shake packed with the refreshing and sweet taste of strawberries."
-},
-
-{
-category:"shakes",
-section:"Shakes",
-name:"Mango Shake",
-price:149,
-description:"Tropical indulgence featuring the luscious and sweet flavor of ripe mango."
-},
-
-{
-category:"shakes",
-section:"Shakes",
-name:"Pineapple Shake",
-price:149,
-description:"A tangy, sweet, and tropical shake that offers a beautifully unique refreshment."
-},
-
-{
-category:"shakes",
-section:"Shakes",
-name:"Chocolate Oreo Shake",
-price:159,
-description:"A thick shake blended with crunchy Oreo cookies and rich chocolate syrup."
-},
-
-{
-category:"shakes",
-section:"Shakes",
-name:"Vanilla Shake",
-price:149,
-description:"Classic, velvety shake loaded with the fragrant essence of vanilla."
-},
-
-{
-category:"shakes",
-section:"Shakes",
-name:"Butter Scotch Shake",
-price:149,
-description:"Rich and buttery shake mixed with crunchy, sweet butterscotch pralines."
-},
-
-{
-category:"shakes",
-section:"Shakes",
-name:"Chocolate Shake",
-price:149,
-description:"Deep, creamy, and satisfying chocolate goodness crafted for cocoa lovers."
-},
-
-{
-category:"shakes",
-section:"Shakes",
-name:"Strawberry Oreo Shake",
-price:179,
-description:"A fusion shake mixing strawberry pulp with the rich crunch of Oreo biscuits."
-},
-
-{
-category:"shakes",
-section:"Shakes",
-name:"Mango Cheese Shake",
-price:179,
-description:"A premium shake combining luscious mango with rich, velvety cream cheese."
-},
-
-{
-category:"shakes",
-section:"Shakes",
-name:"Mango Mastani Shake",
-price:179,
-description:"A thick mango shake topped with premium nuts and extra ice cream."
-},
-
-{
-category:"shakes",
-section:"Shakes",
-name:"Blueberry Shake",
-price:149,
-description:"A smooth shake with the bold, sweet, and tangy profile of blueberries."
-},
-
-{
-category:"shakes",
-section:"Shakes",
-name:"KitKat Chocolate Shake",
-price:159,
-description:"A rich chocolate shake blended with chocolate ice cream and crunchy KitKat pieces."
-},
-
-/* ================= MOCKTAILS ================= */
-
-{
-category:"mocktails",
-section:"Mocktails",
-name:"Virgin Mojito",
-price:129,
-description:"Fresh mint and lime topped with bubbly soda."
-},
-
-{
-category:"mocktails",
-section:"Mocktails",
-name:"Watermelon Smash",
-price:129,
-description:"Sweet watermelon juice smashed with a subtle hint of mint."
-},
-
-{
-category:"mocktails",
-section:"Mocktails",
-name:"Blood Orange",
-price:139,
-description:"A refreshing citrus drink highlighting tangy blood orange."
-},
-
-{
-category:"mocktails",
-section:"Mocktails",
-name:"Cold Blue",
-price:139,
-description:"An icy, crisp mocktail showcasing sweet and citrusy tones."
-},
-
-{
-category:"mocktails",
-section:"Mocktails",
-name:"Blueberry Mojito",
-price:129,
-description:"A fruity twist on the classic mojito with blueberry flavors."
-},
-
-{
-category:"mocktails",
-section:"Mocktails",
-name:"Strawberry Mojito",
-price:139,
-description:"Strawberries mixed with zesty lime and cooling mint."
-},
-
-{
-category:"mocktails",
-section:"Mocktails",
-name:"Lemon Ice Tea",
-price:130,
-description:"Chilled black tea balanced with refreshing lemon juice."
-},
-
-{
-category:"mocktails",
-section:"Mocktails",
-name:"Peach Ice Tea",
-price:135,
-description:"Iced black tea infused with sweet peach flavor."
-},
-
-/* ================= SANDWICHES ================= */
-
-{
-category:"sandwiches",
-section:"Sandwiches",
-name:"Veg Cheese Sandwich",
-price:99,
-description:"Crunchy garden vegetables layered with melted cheese and grilled."
-},
-
-{
-category:"sandwiches",
-section:"Sandwiches",
-name:"Paneer Cheese Sandwich",
-price:99,
-description:"Spiced paneer and cheese packed inside crispy grilled bread."
-},
-
-{
-category:"sandwiches",
-section:"Sandwiches",
-name:"Veg Cheese Corn Sandwich",
-price:109,
-description:"Creamy sandwich loaded with sweet corn and molten cheese."
-},
-
-{
-category:"sandwiches",
-section:"Sandwiches",
-name:"Potato Sandwich",
-price:129,
-description:"Seasoned mashed potato filling with Indian spices."
-},
-
-{
-category:"sandwiches",
-section:"Sandwiches",
-name:"Tripple Deker Sandwich",
-price:159,
-description:"Three-layered club sandwich with vegetables, paneer, sauces and cheese."
-},
-
-{
-category:"sandwiches",
-section:"Sandwiches",
-name:"Veg Plain Sandwich",
-price:49,
-description:"Simple, light and fresh sandwich with butter and garden salad."
-},
-
-{
-category:"sandwiches",
-section:"Sandwiches",
-name:"Special Sandwich",
-price:79,
-description:"Our chef's special recipe with house dressing and roasted ingredients."
-},
-
-/* ================= TOAST & WRAPS ================= */
-
-{
-category:"wraps",
-section:"Toast & Wraps",
-name:"Cheese Garlic Bread",
-price:99,
-description:"Toasted bread with aromatic garlic butter and melted cheese."
-},
-
-{
-category:"wraps",
-section:"Toast & Wraps",
-name:"Veg Cheese Garlic Bread",
-price:109,
-description:"Cheese garlic bread loaded with corn, capsicum and olives."
-},
-
-{
-category:"wraps",
-section:"Toast & Wraps",
-name:"Zesty Paneer Wrap",
-price:139,
-description:"Grilled tortilla wrap with tandoori paneer and crunchy onions."
-},
-
-{
-category:"wraps",
-section:"Toast & Wraps",
-name:"Vegetable Burrito",
-price:149,
-description:"Mexican wrap packed with rice, beans, cheese and salsa."
-},
-
-/* ================= BURGERS ================= */
-
-{
-category:"burgers",
-section:"Burgers",
-name:"Veg Burger",
-price:69,
-description:"Crispy vegetable patty inside soft toasted sesame buns."
-},
-
-{
-category:"burgers",
-section:"Burgers",
-name:"Veg Cheese Burger",
-price:109,
-description:"Classic veg burger with a layer of melted cheese."
-},
-
-{
-category:"burgers",
-section:"Burgers",
-name:"Basera Big Brown Burger",
-price:159,
-description:"Our oversized signature burger with crispy patties and double cheese."
-},
-
-{
-category:"burgers",
-section:"Burgers",
-name:"Veg Hot Dog",
-price:59,
-description:"Soft hot dog bun with grilled vegetable sausage, mustard and ketchup."
-},
-
-{
-category:"burgers",
-section:"Burgers",
-name:"Paneer Mint Magic Burger",
-price:179,
-description:"Crispy paneer burger with refreshing mint mayo."
-},
-
-/* ================= PASTA ================= */
-
-{
-category:"pasta",
-section:"Pasta",
-name:"Alfredo White Sauce",
-price:199,
-description:"Penne pasta tossed in creamy white sauce with butter and cheese."
-},
-
-{
-category:"pasta",
-section:"Pasta",
-name:"Arrabiata Red Sauce",
-price:199,
-description:"Spicy tomato pasta infused with garlic and red chillies."
-},
-
-{
-category:"pasta",
-section:"Pasta",
-name:"Pink Sauce",
-price:209,
-description:"Creamy combination of white Alfredo and tangy tomato sauce."
-},
-
-{
-category:"pasta",
-section:"Pasta",
-name:"Mac & Cheese",
-price:249,
-description:"Macaroni pasta in an indulgent multi-cheese cream sauce."
-},
-
-{
-category:"pasta",
-section:"Pasta",
-name:"Al Fungi",
-price:239,
-description:"Savory pasta loaded with fresh sautéed button mushrooms."
-},
-
-{
-category:"pasta",
-section:"Pasta",
-name:"Pesto Sauce Pasta",
-price:259,
-description:"Aromatic green pesto pasta with basil, olive oil and parmesan."
-},
-
-/* ================= PIZZA ================= */
-
-{
-category:"pizza",
-section:"Pizzas",
-name:"Basera Special Exotica",
-price:199,
-description:"Signature hand-tossed pizza loaded with premium vegetables and cheese."
-},
-
-{
-category:"pizza",
-section:"Pizzas",
-name:"Freaky Chilly",
-price:189,
-description:"Fiery pizza designed for spice lovers."
-},
-
-{
-category:"pizza",
-section:"Pizzas",
-name:"Super Green",
-price:179,
-description:"Fresh pizza topped with green vegetables and herbs."
-},
-
-{
-category:"pizza",
-section:"Pizzas",
-name:"Margherita",
-price:149,
-description:"Classic pizza with tomato sauce, mozzarella and basil."
-},
-
-{
-category:"pizza",
-section:"Pizzas",
-name:"Basera Kids Special",
-price:209,
-description:"A mild and delicious pizza specially made for kids."
-}
-
-];
-
-
-/* ==========================================
-   DISPLAY MENU
-========================================== */
-
-let currentCategory = "all";
-let cart = [];
-
-
-function displayMenu(data){
-
-    const menu = document.getElementById("menu");
-
-    menu.innerHTML = "";
-
-    if(data.length === 0){
-
-        menu.innerHTML = `
-            <div class="no-items">
-                No menu item found.
-            </div>
-        `;
-
-        return;
-    }
-
-    const sections = [...new Set(data.map(item => item.section))];
-
-    sections.forEach(section => {
-
-        const sectionItems =
-            data.filter(item => item.section === section);
-
-        const title = document.createElement("h2");
-
-        title.className = "section-title";
-        title.innerText = section;
-
-        menu.appendChild(title);
-
-        const items = document.createElement("div");
-
-        items.className = "items";
-
-        sectionItems.forEach(item => {
-
-            const card = document.createElement("div");
-
-            card.className = "item";
-
-            card.innerHTML = `
-
-                <div class="item-top">
-
-                    <div class="item-name">
-                        ${item.name}
-                    </div>
-
-                    <div class="price">
-                        ₹${item.price}
-                    </div>
-
-                </div>
-
-                <div class="food-type veg">
-                    ● VEG
-                </div>
-
-                <div class="description">
-                    ${item.description}
-                </div>
-
-                <button class="add-btn"
-                    onclick="addItem('${escapeQuotes(item.name)}',${item.price})">
-
-                    Add to Order
-
-                </button>
-
-            `;
-
-            items.appendChild(card);
-
-        });
-
-        menu.appendChild(items);
-
-    });
-}
-
-
-function escapeQuotes(text){
-
-    return text.replace(/'/g,"\\'");
-
-}
-
-
-/* ==========================================
-   FILTER
-========================================== */
-
-function filterMenu(category,button){
-
-    currentCategory = category;
-
-    document
-        .querySelectorAll(".categories button")
-        .forEach(btn => {
-            btn.classList.remove("active");
-        });
-
-    button.classList.add("active");
-
-    document.getElementById("search").value = "";
-
-    if(category === "all"){        displayMenu(menuData);
-
-    } else {
-
-        const filtered = menuData.filter(item =>
-            item.category === category
-        );
-
-        displayMenu(filtered);
-
-    }
-}
-
-
-/* ==========================================
-   SEARCH
-========================================== */
-
-function searchMenu(){
-
-    const searchText =
-        document.getElementById("search").value
-        .toLowerCase()
-        .trim();
-
-    if(searchText === ""){
-
-        filterMenu(
-            currentCategory,
-            document.querySelector(".categories button.active")
-        );
-
-        return;
-    }
-
-    const filtered = menuData.filter(item => {
-
-        return (
-            item.name.toLowerCase().includes(searchText) ||
-            item.description.toLowerCase().includes(searchText) ||
-            item.section.toLowerCase().includes(searchText)
-        );
-
-    });
-
-    displayMenu(filtered);
-}
-
-
-/* ==========================================
-   CART
-========================================== */
-
-function addItem(name, price){
-
-    cart.push({
-        name:name,
-        price:price
-    });
-
-    updateCart();
-
-}
-
-
-function updateCart(){
-
-    document.getElementById("count").innerText =
-        cart.length;
-
-    const total =
-        cart.reduce((sum,item) => sum + item.price,0);
-
-    document.getElementById("total").innerText =
-        total;
-
-}
-
-
-/* ==========================================
-   ORDER MODAL
-========================================== */
-
-function openOrder(){
-
-    const modal =
-        document.getElementById("modal");
-
-    const orderList =
-        document.getElementById("orderList");
-
-    orderList.innerHTML = "";
-
-    if(cart.length === 0){
-
-        orderList.innerHTML = `
-            <div class="no-items">
-                Your order is empty.
-            </div>
-        `;
-
-    } else {
-
-        cart.forEach((item,index) => {
-
-            const div =
-                document.createElement("div");
-
-            div.className = "order-item";
-
-            div.innerHTML = `
-
-                <span>
-                    ${index + 1}. ${item.name}
-                </span>
-
-                <strong>
-                    ₹${item.price}
-                </strong>
-
-            `;
-
-            orderList.appendChild(div);
-
-        });
-
-    }
-
-    const total =
-        cart.reduce((sum,item) => sum + item.price,0);
-
-    document.getElementById("modalTotal").innerText =
-        total;
-
-    modal.style.display = "flex";
-
-}
-
-
-function closeOrder(){
-
-    document.getElementById("modal").style.display =
-        "none";
-
-}
-
-
-/* ==========================================
-   PLACE ORDER
-========================================== */
-
-function placeOrder(){
-
-    if(cart.length === 0){
-
-        alert("Please add at least one item.");
-
-        return;
-
-    }
-
-    const total =
-        cart.reduce((sum,item) => sum + item.price,0);
-
-    let message =
-        "Hello BASERA! I would like to place an order:%0A%0A";
-
-    cart.forEach((item,index) => {
-
-        message +=
-            `${index + 1}. ${item.name} - ₹${item.price}%0A`;
-
-    });
-
-    message +=
-        `%0ATotal: ₹${total}`;
-
-    /*
-       CHANGE THIS NUMBER TO BASERA'S
-       WHATSAPP NUMBER
-    */
-
-    const whatsappNumber = "919999999999";
-
-    window.open(
-        `https://wa.me/${whatsappNumber}?text=${message}`,
-        "_blank"
-    );
-
-}
-
-
-/* ==========================================
-   START WEBSITE
-========================================== */
-
-displayMenu(menuData);
-
-</script>
-
-</body>
-</html>
+<div class="tag">
+Eat • Talk • Enjoy
+</
